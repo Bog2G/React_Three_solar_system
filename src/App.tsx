@@ -2,14 +2,14 @@ import React from 'react';
 import {Canvas} from '@react-three/fiber';
 import './App.css';
 import Sun from "./components/sun";
-import SKyBox from "./components/SkyBox";
+import { Stars } from "@react-three/drei";
 
 
 function App() {
 
     return (
         <Canvas camera={{position:[0, 0, 5]}} >
-            <SKyBox />
+            <Stars />
             <Sun name="Sun"/>
         </Canvas>
 
