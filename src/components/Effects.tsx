@@ -1,23 +1,15 @@
 import {
-    Bloom,
-    DepthOfField,
     EffectComposer,
-    Noise,
-    Selection,
-    SelectiveBloom,
-    Vignette
 } from '@react-three/postprocessing';
-import sun from "./sun";
 import Sun from "./sun";
+import React from "react";
 
-export default function Effects() {
+export default function Effects(props: any) {
     return (
-        <Selection>
-            <EffectComposer>
-                <Bloom luminanceThreshold={0.1} luminanceSmoothing={0.9} height={300} />
-                <Sun name="Sun"/>
-            </EffectComposer>
-        </Selection>
+
+        <EffectComposer>
+        </EffectComposer>
+
 
     );
 }
