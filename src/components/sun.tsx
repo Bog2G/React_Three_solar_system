@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRef, useEffect } from 'react';
 import { useFrame } from "@react-three/fiber";
-import {Bloom, EffectComposer} from "@react-three/postprocessing";
+import {Select} from "@react-three/postprocessing";
 
 function Sun(props: any) {
     const ref = useRef();
@@ -19,15 +19,15 @@ function Sun(props: any) {
     });
   return (
     <>
-      <mesh {...props} ref = {ref} >
-          <ambientLight />
-          <pointLight />
-          <EffectComposer>
+      <Select>
+          <mesh {...props} ref = {ref} >
+              <ambientLight />
+              <pointLight />
+              <sphereGeometry attach="geometry" args={[0.4,32,32]} />
+              <meshBasicMaterial color="yellow" />
+          </mesh>
+      </Select>
 
-          </EffectComposer>
-          <sphereGeometry attach="geometry" args={[0.4,32,32]} />
-          <meshBasicMaterial color="yellow" />
-      </mesh>
     </>
   );
 }
