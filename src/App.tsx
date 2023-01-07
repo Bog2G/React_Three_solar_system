@@ -14,7 +14,6 @@ function App() {
             <OrbitControls maxDistance={55} />
             <Stars radius={240} speed={0} saturation={1} />
             <Sun name="sun" />
-            <Mars name="mars" position={[5, 1, 1]}/>
         </Canvas>
 
   );
