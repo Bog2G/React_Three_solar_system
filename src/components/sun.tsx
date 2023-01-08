@@ -3,9 +3,6 @@ import { useRef, useEffect } from 'react';
 import { useFrame } from "@react-three/fiber";
 import {EffectComposer, Outline, SelectiveBloom} from "@react-three/postprocessing";
 import THREE, {Object3D} from "three";
-import Mars from "./Planet";
-import Saturn from "./Planet2";
-
 function Sun( props: any) {
     const ref = useRef<Object3D>(null!);
     useEffect(() => {
