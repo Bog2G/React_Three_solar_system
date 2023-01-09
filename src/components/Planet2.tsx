@@ -6,7 +6,7 @@ export default function Planet2(props: any) {
 
     useFrame((state, delta) => {
         planet2Ref.current.rotation.y += 0.5 * delta;
-        const time = state.clock.getElapsedTime() * props.orbitSpeed + Math.PI * 2 ;
+        const time = state.clock.getElapsedTime() * props.orbitSpeed + (props.x * Math.PI * 2) ;
         const x = props.radius * 4 * Math.sin(time);
         const z = props.radius * 4 * Math.cos(time);
         planet2Ref.current.position.x = x;
