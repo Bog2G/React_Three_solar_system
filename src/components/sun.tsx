@@ -21,7 +21,7 @@ function Sun( props: any) {
             <Outline  visibleEdgeColor={0xf48037} edgeStrength={5}  />
         </EffectComposer>
         <mesh  {...props} ref = {ref} >
-            <sphereGeometry attach="geometry" args={[0.5,32,32]} />
+            <sphereGeometry attach="geometry" args={[4.5,32,32]} />
             <meshBasicMaterial color={"yellow"} />
         </mesh>
 
