@@ -17,11 +17,13 @@ function Sun( props: any) {
   return (
     <>
         <EffectComposer >
-            <SelectiveBloom selection={ref}  luminanceThreshold={0.6} intensity={1.8} />
+            <SelectiveBloom selection={ref}  luminanceThreshold={0.467} intensity={5.5} luminanceSmoothing={0.5} />
             <Outline  visibleEdgeColor={0xf48037} edgeStrength={5}  />
         </EffectComposer>
         <mesh  {...props} ref = {ref} >
-            <sphereGeometry attach="geometry" args={[4.5,32,32]} />
+            <ambientLight intensity={0.5} />
+            <pointLight position={[10, 10, 10]} />
+            <sphereGeometry attach="geometry" args={[25,32,32]} />
             <meshBasicMaterial color={"yellow"} />
         </mesh>
 

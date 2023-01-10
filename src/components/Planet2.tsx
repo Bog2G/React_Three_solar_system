@@ -16,7 +16,7 @@ export default function Planet2(props: any) {
     return (
         <mesh {...props} ref={planet2Ref} >
             <sphereGeometry attach="geometry" args={props.size} />
-            <meshBasicMaterial color={"gray"} />
+            <meshStandardMaterial color={"gray"} />
         </mesh>
 
 
