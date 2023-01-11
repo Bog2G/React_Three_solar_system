@@ -11,7 +11,7 @@ import Zoom from "./components/Zoom";
 function App() {
     return (
         <Canvas camera={{position:[150, 20, 50]}}>
-            <OrbitControls maxDistance={600} enablePan={false}/>
+            <OrbitControls maxDistance={600} enablePan={false} makeDefault={true}/>
             <SkyBox />
             <Bounds>
                 <Zoom>
