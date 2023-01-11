@@ -17,7 +17,7 @@ function Sun( props: any) {
   return (
     <>
         <EffectComposer >
-            <SelectiveBloom selection={ref}  luminanceThreshold={0.55} intensity={5.5} luminanceSmoothing={0.2} />
+            <SelectiveBloom selection={ref}  luminanceThreshold={0.55} intensity={5} luminanceSmoothing={0.2} />
         </EffectComposer>
         <mesh  {...props} ref = {ref}>
             <ambientLight intensity={0.5} />
