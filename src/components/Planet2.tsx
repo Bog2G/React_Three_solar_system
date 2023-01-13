@@ -1,6 +1,8 @@
 import { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
-import  { Object3D } from "three";
+import {useFrame, useLoader} from "@react-three/fiber";
+import { Object3D } from "three";
+import * as THREE from "three";
+
 export default function Planet2(props: any) {
     const planet2Ref = useRef<Object3D>(null!);
 
@@ -16,7 +18,7 @@ export default function Planet2(props: any) {
     return (
         <mesh {...props} ref={planet2Ref} >
             <sphereGeometry attach="geometry" args={props.size} />
-            <meshStandardMaterial color={"gray"} />
+            <meshStandardMaterial color={"gray"} map={props.texture} />
         </mesh>
 
 
