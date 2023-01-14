@@ -6,6 +6,7 @@ import * as THREE from "three";
 export default function Planet2(props: any) {
     const planet2Ref = useRef<Object3D>(null!);
 
+
     useFrame((state, delta) => {
         planet2Ref.current.rotation.y += 0.5 * delta;
         const time = state.clock.getElapsedTime() * props.orbitSpeed + (props.x * Math.PI * 2) ;
@@ -20,8 +21,6 @@ export default function Planet2(props: any) {
             <sphereGeometry attach="geometry" args={props.size} />
             <meshStandardMaterial color={"gray"} map={props.texture} />
         </mesh>
-
-
     );
 
 }
