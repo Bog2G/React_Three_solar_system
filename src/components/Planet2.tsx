@@ -1,10 +1,12 @@
-import { useRef } from "react";
+import {useRef, useState} from "react";
 import {useFrame, useLoader} from "@react-three/fiber";
 import { Object3D } from "three";
 import * as THREE from "three";
+import SaturnRing from "./Saturn_ring";
 
 export default function Planet2(props: any) {
     const planet2Ref = useRef<Object3D>(null!);
+    const [planetPosition, setPlanetPosition] = useState([0, 0, 0]);
 
 
     useFrame((state, delta) => {
@@ -14,13 +16,18 @@ export default function Planet2(props: any) {
         const z = props.radius * 4 * Math.cos(time);
         planet2Ref.current.position.x = x;
         planet2Ref.current.position.z = z;
+        setPlanetPosition([x, planet2Ref.current.position.y, z]);
         //planet2Ref.current.position.y += Math.cos(state.clock.getElapsedTime()) / 2;
     });
     return (
-        <mesh {...props} ref={planet2Ref} >
-            <sphereGeometry attach="geometry" args={props.size} />
-            <meshStandardMaterial color={"gray"} map={props.texture} />
-        </mesh>
+        <>
+            <mesh {...props} ref={planet2Ref} >
+                <sphereGeometry attach="geometry" args={props.size} />
+                <meshStandardMaterial color={"gray"} map={props.texture} />
+            </mesh>
+            {props.name === "saturn" && <SaturnRing position={planetPosition}/>}
+        </>
+
     );
 
 }
