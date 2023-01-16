@@ -25,7 +25,7 @@ export default function Planet2(props: any) {
             <mesh {...props} ref={planet2Ref} >
                 <sphereGeometry attach="geometry" args={props.size} />
                 <meshStandardMaterial color={"gray"} map={props.texture} />
-                {props.name === "earth" && <Moon position={[planetPosition[0] + 13, planetPosition[1], planetPosition[2]]} orbitSpeed = {0.043} />}
+                {props.name === "earth" && <Moon position={[planetPosition[0], planetPosition[1], planetPosition[2]]} orbitSpeed = {0.1} />}
             </mesh>
             {props.name === "saturn" && <SaturnRing position={planetPosition}/>}
 

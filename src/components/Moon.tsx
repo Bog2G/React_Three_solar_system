@@ -1,9 +1,11 @@
 import {useRef} from "react";
 import {Object3D} from "three";
-import {useFrame} from "@react-three/fiber";
+import {useFrame, useLoader} from "@react-three/fiber";
+import * as THREE from "three";
 
 export default function Moon(props: any) {
     const moonRef = useRef<Object3D>(null!);
+    const moonTexture = useLoader(THREE.TextureLoader, "2k_moon.jpg");
     useFrame((state, delta) => {
         moonRef.current.rotation.y += 0.2 * delta;
         const time = state.clock.getElapsedTime() * props.orbitSpeed + (0.03 * Math.PI * 2) ;
@@ -15,7 +17,7 @@ export default function Moon(props: any) {
     return (
         <mesh {...props} ref = {moonRef}>
             <sphereGeometry args={[0.8, 32, 32]} />
-            <meshStandardMaterial color={"gray"} />
+            <meshStandardMaterial color={"gray"} map = {moonTexture} />
         </mesh>
     );
 }

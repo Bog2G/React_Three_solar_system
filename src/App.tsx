@@ -1,5 +1,5 @@
-import React, {useEffect, useRef} from 'react';
-import {Canvas, useLoader, useThree} from '@react-three/fiber';
+import React from 'react';
+import {Canvas, useLoader} from '@react-three/fiber';
 import './App.css';
 import Sun from "./components/sun";
 import {Bounds, OrbitControls} from '@react-three/drei'
@@ -21,7 +21,7 @@ function App() {
                 <Zoom>
                     <Planet name="mercury" orbitSpeed={0.0478} radius={9.5} size={[2.53, 32, 32]} x={Math.random()} texture={mercury}/>
                     <Planet name="venus" orbitSpeed={0.038} radius={17.5} size={[4, 32, 32]} x={Math.random()} texture={venus}/>
-                    <Planet name="earth" orbitSpeed={0.042} radius={28.5} size={[5.3, 32, 32]} x={Math.random()} texture={earth}/>
+                    <Planet name="earth" orbitSpeed={0} radius={28.5} size={[5.3, 32, 32]} x={Math.random()} texture={earth}/>
                     <Planet name="mars" orbitSpeed={0.031} radius={40.5} size={[4.4, 32, 32]} x={Math.random()} texture={mars}/>
                     <Planet name="jupiter" orbitSpeed={0.0087} radius={57.5} size={[14, 32, 32]} x={Math.random()} texture={jupiter}/>
                     <Planet name="saturn" orbitSpeed={0.0095} radius={68.5} size={[13.5, 32, 32]} x={Math.random()} texture={saturn}/>
