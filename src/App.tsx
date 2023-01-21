@@ -9,10 +9,8 @@ import Zoom from "./components/Zoom";
 import * as THREE from "three";
 
 
-
 function App() {
-   const [earth, mars, venus, mercury, saturn, jupiter, uranus, neptune] = useLoader(THREE.TextureLoader, [ "2k_earth_daymap.jpg","2k_mars.jpg","2k_venus_surface.jpg","2k_mercury.jpg","2k_saturn.jpg","2k_jupiter.jpg","2k_uranus.jpg","2k_neptune.jpg"]);
-
+   const [earth , mars, venus, mercury, saturn, jupiter, uranus, neptune] = useLoader(THREE.TextureLoader, [ "2k_earth_daymap.jpg","2k_mars.jpg","2k_venus_surface.jpg","2k_mercury.jpg","2k_saturn.jpg","2k_jupiter.jpg","2k_uranus.jpg","2k_neptune.jpg"]);
     return (
         <Canvas>
             <OrbitControls maxDistance={600} enablePan={false} makeDefault={true} position={[50, 20, 100]}/>
@@ -21,7 +19,7 @@ function App() {
                 <Zoom>
                     <Planet name="mercury" orbitSpeed={0.0478} radius={9.5} size={[2.53, 32, 32]} x={Math.random()} texture={mercury}/>
                     <Planet name="venus" orbitSpeed={0.038} radius={17.5} size={[4, 32, 32]} x={Math.random()} texture={venus}/>
-                    <Planet name="earth" orbitSpeed={0} radius={28.5} size={[5.3, 32, 32]} x={Math.random()} texture={earth}/>
+                    <Planet name="earth" orbitSpeed={0} radius={28.5} size={[5.3, 32, 32]} x={Math.random()} texture={earth} />
                     <Planet name="mars" orbitSpeed={0.031} radius={40.5} size={[4.4, 32, 32]} x={Math.random()} texture={mars}/>
                     <Planet name="jupiter" orbitSpeed={0.0087} radius={57.5} size={[14, 32, 32]} x={Math.random()} texture={jupiter}/>
                     <Planet name="saturn" orbitSpeed={0.0095} radius={68.5} size={[13.5, 32, 32]} x={Math.random()} texture={saturn}/>

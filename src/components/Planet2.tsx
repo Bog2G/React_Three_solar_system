@@ -4,10 +4,16 @@ import { Object3D } from "three";
 import * as THREE from "three";
 import SaturnRing from "./Saturn_ring";
 import Moon from "./Moon";
+import Popup from "./Popup";
 
 export default function Planet2(props: any) {
     const planet2Ref = useRef<Object3D>(null!);
     const [planetPosition, setPlanetPosition] = useState([0, 0, 0]);
+    const [popupOpen, setPopupOpen] = useState(false);
+
+    const handleClick = (e: any) => {
+        setPopupOpen(!popupOpen);
+    }
 
 
     useFrame((state, delta) => {
@@ -22,12 +28,13 @@ export default function Planet2(props: any) {
     });
     return (
         <>
-            <mesh {...props} ref={planet2Ref} >
+            <mesh {...props} ref={planet2Ref} onClick={handleClick} >
                 <sphereGeometry attach="geometry" args={props.size} />
-                <meshStandardMaterial color={"gray"} map={props.texture} />
+                <meshStandardMaterial color={"gray"} map={props.texture}/>
                 {props.name === "earth" && <Moon position={[planetPosition[0], planetPosition[1], planetPosition[2]]} orbitSpeed = {0.1} />}
             </mesh>
             {props.name === "saturn" && <SaturnRing position={planetPosition}/>}
+            {popupOpen && <Popup planet={props.name}/>}
 
         </>
 
