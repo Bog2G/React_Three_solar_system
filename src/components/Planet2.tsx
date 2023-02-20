@@ -34,7 +34,6 @@ export default function Planet2(props: any) {
                 {props.name === "earth" && <Moon position={[planetPosition[0], planetPosition[1], planetPosition[2]]} orbitSpeed = {0.1} />}
             </mesh>
             {props.name === "saturn" && <SaturnRing position={planetPosition}/>}
-            {popupOpen && <Popup planet={props.name}/>}
 
         </>
 
