@@ -1,33 +1,96 @@
-import React from 'react';
-import {Canvas, useLoader} from '@react-three/fiber';
-import './App.css';
-import Sun from "./components/sun";
-import {Bounds, OrbitControls, PerspectiveCamera} from '@react-three/drei'
-import Planet from "./components/Planet2";
-import SkyBox from "./components/SkyBox";
-import Zoom from "./components/Zoom";
-import * as THREE from "three";
+import { useState, useCallback, Suspense } from "react";
+import { Canvas, useLoader } from "@react-three/fiber";
+import { OrbitControls, PerspectiveCamera, Html } from "@react-three/drei";
+import { TextureLoader, Texture } from "three";
 
+import Sun from "./components/Sun";
+import Planet from "./components/Planet";
+import SkyBox from "./components/SkyBox";
+import Popup from "./components/Popup";
+import { PLANETS, INITIAL_ANGLES, PlanetData } from "./data/planets";
+import "./App.css";
+
+// Loading component for Suspense fallback
+function Loader() {
+  return (
+    <Html center>
+      <div style={{ color: "white", fontSize: "1.5rem" }}>
+        Loading Solar System...
+      </div>
+    </Html>
+  );
+}
+
+// Component that loads textures and renders planets
+function SolarSystem({
+  onPlanetClick,
+}: {
+  onPlanetClick: (planet: PlanetData) => void;
+}) {
+  // Load all textures at once
+  const textures = useLoader(
+    TextureLoader,
+    PLANETS.map((p) => p.textureFile)
+  ) as Texture[];
+
+  return (
+    <>
+      <SkyBox />
+      <Sun />
+      {PLANETS.map((planet, index) => (
+        <Planet
+          key={planet.name}
+          name={planet.name}
+          orbitSpeed={planet.orbitSpeed}
+          radius={planet.radius}
+          size={planet.size}
+          rotationSpeed={planet.rotationSpeed}
+          initialAngle={INITIAL_ANGLES[planet.name]}
+          texture={textures[index]}
+          hasMoon={planet.hasMoon}
+          hasRing={planet.hasRing}
+          planetData={planet}
+          onPlanetClick={onPlanetClick}
+        />
+      ))}
+    </>
+  );
+}
 
 function App() {
-   const [earth , mars, venus, mercury, saturn, jupiter, uranus, neptune] = useLoader(THREE.TextureLoader, [ "2k_earth_daymap.jpg","2k_mars.jpg","2k_venus_surface.jpg","2k_mercury.jpg","2k_saturn.jpg","2k_jupiter.jpg","2k_uranus.jpg","2k_neptune.jpg"]);
-    return (
-        <Canvas>
-            <PerspectiveCamera makeDefault={true} position={[50, 40, 400]} />
-            <OrbitControls maxDistance={750} enablePan={false}/>
-            <SkyBox />
-            <Planet name="mercury" orbitSpeed={0.0478} radius={9.5} size={[2.53, 32, 32]} x={Math.random()} texture={mercury}/>
-            <Planet name="venus" orbitSpeed={0.038} radius={17.5} size={[4, 32, 32]} x={Math.random()} texture={venus}/>
-            <Planet name="earth" orbitSpeed={0.033} radius={28.5} size={[5.3, 32, 32]} x={Math.random()} texture={earth} />
-            <Planet name="mars" orbitSpeed={0.031} radius={40.5} size={[4.4, 32, 32]} x={Math.random()} texture={mars}/>
-            <Planet name="jupiter" orbitSpeed={0.0087} radius={57.5} size={[14, 32, 32]} x={Math.random()} texture={jupiter}/>
-            <Planet name="saturn" orbitSpeed={0.0095} radius={68.5} size={[13.5, 32, 32]} x={Math.random()} texture={saturn}/>
-            <Planet name="uranus" orbitSpeed={0.0084} radius={79.5} size={[7.4, 32, 32]} x={Math.random()} texture={uranus}/>
-            <Planet name="neptune" orbitSpeed={0.0078} radius={90.5} size={[8.1, 32, 32]} x={Math.random()} texture={neptune}/>
-            <Sun name="sun" />
+  const [selectedPlanet, setSelectedPlanet] = useState<PlanetData | null>(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-        </Canvas>
+  const handlePlanetClick = useCallback((planet: PlanetData) => {
+    setSelectedPlanet(planet);
+    setIsPopupOpen(true);
+  }, []);
 
+  const handleClosePopup = useCallback(() => {
+    setIsPopupOpen(false);
+  }, []);
+
+  return (
+    <>
+      <Canvas>
+        <PerspectiveCamera makeDefault position={[50, 40, 400]} />
+        <OrbitControls
+          maxDistance={750}
+          minDistance={30}
+          enablePan={false}
+          enableDamping
+          dampingFactor={0.05}
+        />
+        <Suspense fallback={<Loader />}>
+          <SolarSystem onPlanetClick={handlePlanetClick} />
+        </Suspense>
+      </Canvas>
+      <Popup
+        planet={selectedPlanet}
+        isOpen={isPopupOpen}
+        onClose={handleClosePopup}
+      />
+    </>
   );
 }
 

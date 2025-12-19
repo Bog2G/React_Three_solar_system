@@ -1,9 +1,0 @@
-.popup {
-    position: fixed;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 10px;
-    border: 1px solid black;
-    Color: white;
-}

@@ -1,13 +1,4 @@
-html,
-body,
-#root {
-  margin: 0;
-  padding: 0;
-  background: black;
-  height: 100%;
-  width: 100%;
-
-
-
-
+/* App-level styles */
+canvas {
+  display: block;
 }
