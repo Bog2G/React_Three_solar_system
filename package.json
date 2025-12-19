@@ -2,6 +2,9 @@
   "name": "solar_system",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
     "@react-three/drei": "^9.50.4",
     "@react-three/fiber": "^8.9.2",
